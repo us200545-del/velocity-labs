@@ -1,0 +1,13 @@
+<div class="w-full max-w-md p-10 auth-card border border-white/10 shadow-2xl">
+    <h1 class="font-orbitron text-2xl italic font-black tracking-tighter uppercase mb-6 text-center">Reset <span class="text-purple-500">Access</span></h1>
+    
+    <form action="/reset-password" method="POST" class="space-y-6">
+        <input type="text" name="username" placeholder="USERNAME" required class="w-full bg-zinc-900/50 border border-white/5 p-4 text-[11px] outline-none focus:border-purple-500/50">
+        <input type="text" name="recovery_code" placeholder="RECOVERY CODE" required class="w-full bg-zinc-900/50 border border-white/5 p-4 text-[11px] outline-none focus:border-purple-500/50">
+        <input type="password" name="new_password" placeholder="NEW PASSKEY" required class="w-full bg-zinc-900/50 border border-white/5 p-4 text-[11px] outline-none focus:border-purple-500/50">
+        
+        <button type="submit" class="w-full py-4 bg-white text-black font-orbitron font-black uppercase text-[10px] tracking-[0.3em] hover:bg-purple-600 hover:text-white transition-all">
+            Update Credentials
+        </button>
+    </form>
+</div>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-LABS | AUTHENTICATION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif; 
+            background-color: #000;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       #video-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    /* This centering trick fixes the "shifted up" issue */
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: brightness(0.4) contrast(1.1);
+}
+
+        /* FROSTED GLASS EFFECT */
+        .auth-card {
+            background: rgba(10, 10, 10, 0.65);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* CUSTOM INPUT STYLING */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: white;
+            -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0) inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+</head>
+<body class="text-white p-6">
+
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="{{ url_for('static', filename='video/bmw_eye.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="w-full max-w-md p-10 auth-card relative">
+        
+        <div class="text-center mb-10">
+            <h1 class="font-orbitron text-3xl italic font-black tracking-tighter uppercase leading-none">
+                Velocity<span class="text-purple-500">Labs</span>
+            </h1>
+            <p class="text-zinc-500 text-[8px] uppercase tracking-[0.6em] mt-3 font-bold">Authorized Access Only</p>
+        </div>
+
+        <form action="/login" method="POST" class="space-y-6">
+            <div>
+                <label class="block text-[8px] uppercase tracking-[0.3em] text-zinc-500 mb-3 font-black">Driver ID</label>
+                <input type="text" name="username" placeholder="VLC-XXXX" required 
+                       class="w-full bg-black/40 border border-white/5 p-4 text-[11px] font-mono text-white outline-none focus:border-purple-500/50 transition placeholder:text-zinc-800">
+            </div>
+            
+            <div>
+                <label class="block text-[8px] uppercase tracking-[0.3em] text-zinc-500 mb-3 font-black">Passkey</label>
+                <input type="password" name="password" placeholder="••••••••" required 
+                       class="w-full bg-black/40 border border-white/5 p-4 text-[11px] font-mono text-white outline-none focus:border-purple-500/50 transition placeholder:text-zinc-800">
+            </div>
+
+            <div class="flex justify-end mt-2 mb-4">
+                <a href="#" onclick="alert('Access Restricted: Contact Admin')" ... class="text-[7px] text-zinc-600 uppercase tracking-widest hover:text-purple-500 transition">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="w-full py-4 bg-white text-black font-orbitron font-black uppercase text-[10px] tracking-[0.3em] hover:bg-purple-600 hover:text-white transition-all duration-500 shadow-2xl">
+                Authenticate
+            </button>
+        </form>
+
+        <div class="mt-10 pt-8 border-t border-white/5 flex flex-col gap-4 text-center">
+            <p class="text-[9px] text-zinc-600 uppercase tracking-widest">
+                New Engineer? <a href="#" onclick="alert('Enrollment Closed')" ... class="text-purple-500 font-black hover:text-white transition">Create Account</a>
+            </p>
+            <a href="/" class="text-[8px] text-zinc-700 uppercase tracking-[0.4em] hover:text-zinc-400 transition">
+                ← Return to Garage
+            </a>
+        </div>
+
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-LABS | {{ title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050505; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        h1 { font-family: 'Orbitron', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#050505] text-white antialiased">
+    <div class="container mx-auto px-8 py-20">
+        
+        <a href="/" class="text-zinc-600 hover:text-purple-500 text-[10px] uppercase tracking-[0.4em] mb-12 inline-block transition">
+            ← Return to Lab
+        </a>
+
+        <div class="mb-16 border-l-4 border-purple-500 pl-6">
+            <h1 class="text-5xl md:text-7xl font-black italic tracking-tighter uppercase leading-none">{{ title }}</h1>
+            <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em] mt-2 font-bold italic">Authenticated Hardware Inventory</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {% for item in items %}
+            <div class="flex bg-[#0a0a0a] border border-white/5 overflow-hidden group hover:border-purple-500/40 transition-all duration-500 h-[220px]">
+                
+                <div class="relative w-1/3 min-w-[140px] h-full overflow-hidden bg-black border-r border-white/5">
+                    <img src="/static/parts/{{ item.img }}" alt="{{ item.name }}"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100">
+                    
+                    <div class="absolute top-3 left-3 bg-purple-600 text-white px-2 py-1 text-[9px] font-black uppercase tracking-widest italic">
+                        {{ item.price }}
+                    </div>
+                </div>
+
+                <div class="p-6 flex-1 flex flex-col justify-between bg-zinc-900/20">
+                    <div>
+                        <p class="text-purple-500 text-[8px] font-mono mb-1 tracking-widest uppercase italic">Stage Verified</p>
+                        <h3 class="text-white font-black uppercase tracking-tighter text-lg leading-none mb-3">{{ item.name }}</h3>
+                        
+                        <div class="mb-2">
+                            <p class="text-zinc-600 text-[7px] uppercase font-black tracking-widest mb-1">Compatibility</p>
+                            <p class="text-zinc-400 text-[9px] italic leading-tight">{{ item.compat }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-1 h-1 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></div>
+                            <span class="text-[8px] text-zinc-500 uppercase tracking-widest font-bold">In Stock</span>
+                        </div>
+
+                        <button onclick="addToBuild('{{ item.name }}', '{{ item.img }}', '{{ item.price }}')" 
+                                class="w-full py-4 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] hover:bg-purple-600 hover:text-white transition-all duration-500">
+                            Add to Build
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function addToBuild(itemName, itemImg, itemPrice) {
+            let cart = JSON.parse(localStorage.getItem('vlab_cart')) || [];
+            
+            // CRITICAL: We now save the price too!
+            cart.push({ 
+                name: itemName, 
+                img: itemImg, 
+                price: itemPrice 
+            });
+            
+            localStorage.setItem('vlab_cart', JSON.stringify(cart));
+            alert("✔️ " + itemName + " added to build list!");
+        }
+    </script>
+</body>
+</html>

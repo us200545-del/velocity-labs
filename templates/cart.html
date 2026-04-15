@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-LABS | BUILD SUMMARY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#050505] text-white font-['Inter'] antialiased">
+    <div class="container mx-auto px-8 py-20">
+        <a href="/" class="text-zinc-600 hover:text-purple-500 text-[10px] uppercase tracking-[0.4em] mb-12 inline-block transition">← Back to Lab</a>
+        
+        <h1 class="text-6xl font-black italic tracking-tighter uppercase font-['Orbitron'] mb-4">Build <span class="text-purple-500">Summary</span></h1>
+        <p class="text-zinc-500 text-[10px] uppercase tracking-[0.5em] mb-12 font-bold italic">Configuring your performance package</p>
+
+        <div id="cartItems" class="space-y-4">
+            </div>
+
+        <div class="mt-12 p-8 bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+            <div>
+                <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">Build Status</p>
+                <h2 class="text-2xl font-black uppercase italic">Ready for Installation</h2>
+            </div>
+            <button onclick="clearBuild()" class="px-10 py-4 bg-red-600/20 text-red-500 border border-red-500/50 uppercase font-black text-[10px] tracking-widest hover:bg-red-600 hover:text-white transition">Clear Build</button>
+        </div>
+    </div>
+     
+    <div class="mt-12">
+    <a href="/payment" class="block w-full text-center py-5 bg-purple-600 text-white font-black uppercase tracking-[0.3em] text-xs hover:bg-purple-500 transition-all shadow-[0_0_30px_rgba(168,85,247,0.2)]">
+        Proceed to Secure Payment
+    </a>
+</div>
+
+    <script>
+    function loadCart() {
+        const cart = JSON.parse(localStorage.getItem('vlab_cart')) || [];
+        const container = document.getElementById('cartItems');
+        
+        if (cart.length === 0) {
+            container.innerHTML = '<p class="text-zinc-700 uppercase font-black italic text-xl">Your build list is empty.</p>';
+            return;
+        }
+
+        // Now we access item.img and item.name
+        container.innerHTML = cart.map((item, index) => `
+            <div class="flex items-center bg-zinc-900/30 border border-white/5 overflow-hidden group hover:border-purple-500/30 transition">
+                <div class="w-24 h-24 bg-black border-r border-white/5">
+                    <img src="/static/parts/${item.img}" class="w-full h-full object-cover opacity-80">
+                </div>
+                
+                <div class="p-6">
+                    <span class="text-purple-500 font-mono text-[9px] block uppercase tracking-widest">Component 0${index + 1}</span>
+                    <h3 class="text-white text-lg font-bold uppercase tracking-widest">${item.name}</h3>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function clearBuild() {
+        if(confirm("Are you sure you want to wipe this build?")) {
+            localStorage.removeItem('vlab_cart');
+            loadCart();
+        }
+    }
+
+    loadCart();
+</script>
+</body>
+</html>

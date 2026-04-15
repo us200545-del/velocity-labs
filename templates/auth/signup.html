@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-LABS | ENLISTMENT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #050505; 
+            font-family: 'Inter', sans-serif; 
+            /* Same background as login for consistency */
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+                              url("{{ url_for('static', filename='images/bmw_m4.jpg') }}"); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-card {
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    </style>
+</head>
+<body class="text-white p-6">
+
+    <div class="w-full max-w-md p-10 auth-card border border-white/10 shadow-2xl relative">
+        
+        <div class="text-center mb-10">
+            <h1 class="font-orbitron text-3xl italic font-black tracking-tighter uppercase leading-none">
+                Join<span class="text-purple-500">Labs</span>
+            </h1>
+            <p class="text-zinc-500 text-[8px] uppercase tracking-[0.6em] mt-3 font-bold">New Engineer Registration</p>
+        </div>
+
+        <form action="/signup" method="POST" class="space-y-6">
+            <div>
+                <label class="block text-[8px] uppercase tracking-[0.3em] text-zinc-500 mb-2 font-black">Choose Driver ID</label>
+                <input type="text" name="username" placeholder="e.g. SKYLINE_GT" required 
+                       class="w-full bg-zinc-900/50 border border-white/5 p-4 text-[11px] font-mono outline-none focus:border-purple-500/50 transition">
+            </div>
+            
+            <div>
+                <label class="block text-[8px] uppercase tracking-[0.3em] text-zinc-500 mb-2 font-black">Set Passkey</label>
+                <input type="password" name="password" placeholder="••••••••" required 
+                       class="w-full bg-zinc-900/50 border border-white/5 p-4 text-[11px] font-mono outline-none focus:border-purple-500/50 transition">
+            </div>
+
+            <div>
+                <label class="block text-[8px] uppercase tracking-[0.3em] text-zinc-500 mb-2 font-black">Recovery PIN (4-Digits)</label>
+                <input type="text" name="recovery_code" placeholder="1234" maxlength="4" required 
+                       class="w-full bg-zinc-900/50 border border-white/5 p-4 text-[11px] font-mono outline-none focus:border-purple-500/50 transition">
+                <p class="text-[7px] text-zinc-600 mt-2 uppercase tracking-widest italic">Needed if you forget your passkey</p>
+            </div>
+
+            <button type="submit" class="w-full py-4 bg-white text-black font-orbitron font-black uppercase text-[10px] tracking-[0.3em] hover:bg-purple-600 hover:text-white transition-all duration-500">
+                Register Engineer
+            </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-white/5 text-center">
+            <p class="text-[9px] text-zinc-600 uppercase tracking-widest">
+                Already Authenticated? <a href="/login" class="text-purple-500 font-black hover:text-white transition">Sign In</a>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>

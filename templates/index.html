@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velocity Labs | Precision Tuning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styling & Blur Fixes */
+        body { background-color: #050505; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        h1, h2, h3, h4, .nav-brand { font-family: 'Orbitron', sans-serif; font-weight: 900; text-transform: uppercase; }
+        
+        /* Ensures fonts are smooth and sharp on dark mode */
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+        /* Neon & Hero Effects */
+        .neon-text { text-shadow: 0 0 10px 0 0 20px #440404, 0 0 30px #2e0707; }
+        .hero-gradient { background: linear-gradient(to bottom, rgba(5,5,5,0) 0%, rgba(5,5,5,0.7) 70%, #050505 100%); }
+    </style>
+</head>
+<body class="text-white">
+
+    <nav class="sticky top-0 z-50 bg-black/90 backdrop-blur-md p-6 flex justify-between items-center border-b border-white/5">
+        <div class="nav-brand text-2xl italic tracking-tighter">VELOCITY<span class="text-purple-500">LABS</span></div>
+        <div class="hidden md:flex space-x-8 text-xs uppercase tracking-widest font-bold text-zinc-400">
+            <a href="#services" class="hover:text-purple-500 transition">Services</a>
+            <a href="#garage" class="hover:text-purple-500 transition">Garage</a>
+            <a href="#contact" class="hover:text-purple-500 transition">Contact</a>
+        </div>
+        <a href="#contact" class="bg-purple-600 px-6 py-2 rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-purple-500 transition shadow-[0_0_20px_rgba(168,85,247,0.3)]">Book Tuning</a>
+    </nav>
+
+    <section class="relative h-[90vh] flex items-center justify-center text-center overflow-hidden antialiased">
+        
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 brightness-[0.4]">
+            <source src="/static/video/hero_bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="absolute inset-0 hero-gradient z-10"></div>
+        
+        <div class="relative z-20 px-4">
+            <h1 class="text-5xl md:text-9xl font-black italic tracking-tighter mb-2 leading-none">
+                Unleash the <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 neon-text">
+                    Beast Within
+                </span>
+            </h1>
+            <p class="text-zinc-500 tracking-[0.3em] uppercase text-xs font-bold mb-10 opacity-80">
+                High Performance ECU Calibration & Engineering
+            </p>
+        </div>
+    </section>
+
+   <section id="garage" class="py-24 bg-[#050505] antialiased">
+    <div class="container mx-auto px-8">
+        
+        <div class="mb-16">
+            <h2 class="text-white text-4xl font-black italic tracking-tighter uppercase">Hardware <span class="text-purple-500">Inventory</span></h2>
+            <p class="text-zinc-500 text-[10px] uppercase tracking-[0.5em] mt-2 font-bold">Authorized Personnel Only</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <div class="cursor-pointer group" onclick="openTuning('bmw_m4')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/bmw_m4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">BMW M4 Competition</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">Stage 2+ | 700 HP</p>
+                </div>
+            </div>
+
+            <div class="cursor-pointer group" onclick="openTuning('porsche_911')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/porsche_911.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">Porsche 911 Turbo S</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">Stage 2 | 720 HP</p>
+                </div>
+            </div>
+
+            <div class="cursor-pointer group" onclick="openTuning('mercedes_cls')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/mercedes_cls.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">Mercedes-AMG CLS</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">Stage 1+ | 680 HP</p>
+                </div>
+            </div>
+
+            <div class="cursor-pointer group" onclick="openTuning('nissan_gtr')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/nissan_gtr.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">Nissan GT-R R35</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">Stage 4 | 1100 HP</p>
+                </div>
+            </div>
+
+            <div class="cursor-pointer group" onclick="openTuning('audi_a7')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/audi_a7.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">Audi A7 Sportback</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">V6 Custom | 580 HP</p>
+                </div>
+            </div>
+
+            <div class="cursor-pointer group" onclick="openTuning('aston_martin')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/aston_martin.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">Aston Martin DBS</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">V12 Tune | 800 HP</p>
+                </div>
+            </div>
+
+            <div class="cursor-pointer group" onclick="openTuning('virtus_gt')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/virtus_track.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">Volkswagen Virtus GT</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">Stage 3R | 340 HP</p>
+                </div>
+            </div>
+
+            <div class="cursor-pointer group" onclick="openTuning('baleno')">
+                <div class="relative overflow-hidden border border-white/5 bg-zinc-900 aspect-video">
+                    <img src="/static/images/baleno_track.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-white font-black italic uppercase tracking-tighter text-lg">Suzuki Baleno RS</p>
+                    <p class="text-purple-500 text-[9px] font-bold uppercase tracking-widest mt-1">Stage 3+ | 290 HP</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<section>
+
+    <section id="stock" class="py-24 bg-[#050505] border-t border-white/5 antialiased">
+    <div class="container mx-auto px-8">
+        
+        <div class="mb-16">
+            <h2 class="text-white text-4xl font-black italic tracking-tighter uppercase">Hardware <span class="text-purple-500">Stock</span></h2>
+            <p class="text-zinc-500 text-[10px] uppercase tracking-[0.5em] mt-2 font-bold">In-House Performance Material</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+            <a href="/inventory/alloys" class="group no-underline">
+                <div class="p-6 bg-zinc-900/30 border border-white/5 group-hover:border-purple-500/50 transition-all duration-500">
+                    <p class="text-zinc-600 text-[8px] font-mono mb-2 group-hover:text-purple-400">PART_ID: VL-WHL-01</p>
+                    <h3 class="text-white font-bold uppercase tracking-tighter text-lg">Forged Alloys</h3>
+                </div>
+            </a>
+
+            <a href="/inventory/exhaust" class="group no-underline">
+                <div class="p-6 bg-zinc-900/30 border border-white/5 group-hover:border-purple-500/50 transition-all duration-500">
+                    <p class="text-zinc-600 text-[8px] font-mono mb-2 group-hover:text-purple-400">PART_ID: VL-EXH-09</p>
+                    <h3 class="text-white font-bold uppercase tracking-tighter text-lg">Exhaust Systems</h3>
+                </div>
+            </a>
+
+            <a href="/inventory/filter" class="group no-underline">
+                <div class="p-6 bg-zinc-900/30 border border-white/5 group-hover:border-purple-500/50 transition-all duration-500">
+                    <p class="text-zinc-600 text-[8px] font-mono mb-2 group-hover:text-purple-400">PART_ID: VL-FLT-02</p>
+                    <h3 class="text-white font-bold uppercase tracking-tighter text-lg">Air Filters</h3>
+                </div>
+            </a>
+
+            <a href="/inventory/suspension" class="group no-underline">
+                <div class="p-6 bg-zinc-900/30 border border-white/5 group-hover:border-purple-500/50 transition-all duration-500">
+                    <p class="text-zinc-600 text-[8px] font-mono mb-2 group-hover:text-purple-400">PART_ID: VL-SUS-04</p>
+                    <h3 class="text-white font-bold uppercase tracking-tighter text-lg">Air Suspension</h3>
+                </div>
+            </a>
+
+            <a href="/inventory/turbo" class="group no-underline">
+                <div class="p-6 bg-zinc-900/30 border border-white/5 group-hover:border-purple-500/50 transition-all duration-500">
+                    <p class="text-zinc-600 text-[8px] font-mono mb-2 group-hover:text-purple-400">PART_ID: VL-TRB-88</p>
+                    <h3 class="text-white font-bold uppercase tracking-tighter text-lg">Turbo Chargers</h3>
+                </div>
+            </a>
+
+            <a href="/inventory/spoilers" class="group no-underline">
+                <div class="p-6 bg-zinc-900/30 border border-white/5 group-hover:border-purple-500/50 transition-all duration-500">
+                    <p class="text-zinc-600 text-[8px] font-mono mb-2 group-hover:text-purple-400">PART_ID: VL-AER-12</p>
+                    <h3 class="text-white font-bold uppercase tracking-tighter text-lg">Spoilers / Aero</h3>
+                </div>
+            </a>
+
+            <a href="/inventory/headlights" class="group no-underline">
+                <div class="p-6 bg-zinc-900/30 border border-white/5 group-hover:border-purple-500/50 transition-all duration-500">
+                    <p class="text-zinc-600 text-[8px] font-mono mb-2 group-hover:text-purple-400">PART_ID: VL-LGT-05</p>
+                    <h3 class="text-white font-bold uppercase tracking-tighter text-lg">Headlights</h3>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+    <section id="contact" class="py-24 bg-[#050505] border-t border-white/5 antialiased">
+    <div class="container mx-auto px-8 text-center">
+        <h2 class="text-4xl md:text-5xl italic mb-4 tracking-tighter uppercase font-black">
+            Ready to <span class="text-purple-500">Tune?</span>
+        </h2>
+        <p class="text-zinc-500 mb-12 max-w-lg mx-auto uppercase text-[10px] tracking-[0.3em] font-bold">
+            Connect with our engineering team to start your build.
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="group bg-zinc-900/50 border border-white/5 p-8 hover:border-green-500 transition-all duration-500">
+                <div class="text-green-500 text-3xl mb-4 group-hover:scale-110 transition-transform">💬</div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-sm">WhatsApp</h4>
+                <p class="text-zinc-500 text-xs mt-2">+91 XXXXX XXXXX</p>
+            </a>
+
+            <a href="https://instagram.com/yourhandle" target="_blank" class="group bg-zinc-900/50 border border-white/5 p-8 hover:border-pink-500 transition-all duration-500">
+                <div class="text-pink-500 text-3xl mb-4 group-hover:scale-110 transition-transform">📸</div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-sm">Instagram</h4>
+                <p class="text-zinc-500 text-xs mt-2">@VelocityLabs_Tuning</p>
+            </a>
+
+            <a href="mailto:info@velocitylabs.com" class="group bg-zinc-900/50 border border-white/5 p-8 hover:border-purple-500 transition-all duration-500">
+                <div class="text-purple-500 text-3xl mb-4 group-hover:scale-110 transition-transform">✉️</div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-sm">Official Email</h4>
+                <p class="text-zinc-500 text-xs mt-2">builds@velocitylabs.com</p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+    <div id="tuningModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 antialiased">
+    
+    <video id="modalBgVideo" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 brightness-[0.2]">
+        <source id="bgVideoSource" src="" type="video/mp4">
+    </video>
+
+    <div id="partModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl">
+    <div class="w-full max-w-2xl bg-zinc-950 border border-white/10 p-8 relative">
+        <button onclick="closePartModal()" class="absolute top-6 right-6 text-zinc-500 hover:text-white transition">✕</button>
+        
+        <h2 id="partModalTitle" class="text-white text-3xl font-black italic uppercase tracking-tighter mb-8 italic">PART_LIST</h2>
+        
+        <div id="partItemContainer" class="grid grid-cols-1 gap-2">
+            </div>
+
+        <button onclick="closePartModal()" class="mt-8 w-full py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] hover:bg-purple-500 hover:text-white transition">Return to Warehouse</button>
+    </div>
+</div>
+
+    <div class="relative z-10 bg-black/40 backdrop-blur-xl border border-white/10 max-w-6xl w-full max-h-[90vh] overflow-y-auto p-8 md:p-12 rounded-sm shadow-2xl">
+        
+        <button onclick="closeModal()" class="absolute top-8 right-8 text-zinc-500 hover:text-white text-3xl font-light transition-colors">&times;</button>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            
+            <div class="space-y-8">
+                <div class="relative w-full aspect-video overflow-hidden border border-white/10 shadow-2xl">
+                    <video id="modalMainVideo" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                </div>
+                
+                <div>
+                    <h2 id="modalTitle" class="text-4xl md:text-6xl font-black italic tracking-tighter uppercase text-white leading-none mb-6"></h2>
+                    <div class="flex gap-10">
+                        <div>
+                            <p class="text-zinc-500 uppercase text-[9px] font-black tracking-[0.4em] mb-2">Stock</p>
+                            <p id="modalStock" class="text-2xl font-black italic text-zinc-400"></p>
+                        </div>
+                        <div class="border-l border-white/10 pl-10">
+                            <p class="text-purple-500 uppercase text-[9px] font-black tracking-[0.4em] mb-2">Velocity Tune</p>
+                            <p id="modalTune" class="text-3xl font-black italic text-white"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-between">
+                <div>
+                    <h3 class="text-[10px] font-black uppercase tracking-[0.6em] mb-8 text-zinc-500 border-b border-white/5 pb-4">Hardware Inventory</h3>
+                    <ul id="upgradeList" class="space-y-3">
+                        </ul>
+                </div>
+                
+                <button onclick="closeModal()" class="mt-12 w-full bg-white text-black py-5 font-black uppercase text-xs tracking-[0.3em] hover:bg-purple-600 hover:text-white transition-all duration-500">
+                    Exit Selection
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden md:flex space-x-8 text-xs uppercase tracking-widest font-bold text-zinc-400">
+    <a href="#services" class="hover:text-purple-500 transition">Services</a>
+    <a href="#garage" class="hover:text-purple-500 transition">Garage</a>
+    <a href="/view-build" class="text-purple-500 hover:text-white transition">View Build [Cart]</a>
+</div>
+
+<footer class="py-10 bg-black border-t border-white/5 mt-20">
+    <div class="container mx-auto px-8 flex justify-between items-center">
+        <div>
+            <p class="text-zinc-500 text-[10px] uppercase tracking-[0.4em] font-bold">Velocity Labs</p>
+            <p class="text-zinc-700 text-[8px] uppercase tracking-widest mt-1">© 2026 Engineering & Performance</p>
+        </div>
+        
+        <div class="flex items-center gap-8">
+            {% if session.get('logged_in') %}
+                <a href="/logout" class="group flex items-center gap-3 no-underline">
+                    <span class="text-red-500 group-hover:text-white text-[9px] uppercase tracking-[0.3em] transition-all duration-300">
+                        Terminate Session
+                    </span>
+                    <div class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444] animate-pulse"></div>
+                </a>
+            {% else %}
+                <a href="/login" class="group flex items-center gap-3 no-underline">
+                    <span class="text-zinc-600 group-hover:text-purple-500 text-[9px] uppercase tracking-[0.3em] transition-all duration-300">
+                        Staff Portal
+                    </span>
+                    <div class="w-2 h-2 rounded-full bg-zinc-800 group-hover:bg-purple-500 transition-all duration-500"></div>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</footer>
+
+  <script>
+    // @ts-ignore
+    const isLoggedIn = ("{{ 'true' if session.get('logged_in') else 'false' }}" === 'true');
+
+    const carData = {
+        "porsche_911": { title: "Porsche 911 Turbo S", stock: "640 HP", tune: "720 HP", upgrades: ["VTG Turbo Upgrade", "Stage 2 ECU Remap", "Titanium Exhaust"] },
+        "bmw_m4": { title: "BMW M4 Competition", stock: "503 HP", tune: "700 HP", upgrades: ["S58 Pure Turbos", "Stage 3 Custom Map", "Transmission Flash"] },
+        "nissan_gtr": { title: "Nissan GTR R35", stock: "565 HP", tune: "1100 HP", upgrades: ["Alpha 12 Turbo Kit", "Built Short Block", "ShepTrans Box"] },
+        "mercedes_cls": { title: "Mercedes CLS 63 AMG", stock: "577 HP", tune: "680 HP", upgrades: ["M157 Downpipes", "Stage 1+ Remap", "Air Suspension Mod"] },
+        "audi_a7": { title: "Audi A7 Sportback", stock: "335 HP", tune: "580 HP", upgrades: ["Hybrid Turbo Kit", "Intercooler Upgrade", "Quattro Tune"] },
+        "aston_martin": { title: "Aston Martin DBS", stock: "715 HP", tune: "800 HP", upgrades: ["V12 ECU Calibration", "Valved Exhaust", "Carbon Intake"] },
+        "virtus_gt": { title: "Volkswagen Virtus GT", stock: "150 HP", tune: "340 HP", upgrades: ["Stage 3R Hybrid Turbo Kit", "Forged Engine Internals", "AWD Conversion Mod"] },
+        "baleno": { title: "Suzuki Baleno RS", stock: "100 HP", tune: "290 HP", upgrades: ["Full System Titanium Exhaust", "Performance Stage 3+ Map", "Aggressive Aero Kit"] }
+    };
+
+    function openTuning(carKey) {
+        // If the user isn't logged in, send them to the login gate
+        if (!isLoggedIn) {
+            window.location.href = "/login";
+            return; 
+        }
+
+        const car = carData[carKey];
+        if (!car) return;
+
+        // Update Text Content
+        document.getElementById('modalTitle').innerText = car.title;
+        document.getElementById('modalStock').innerText = car.stock;
+        document.getElementById('modalTune').innerText = car.tune;
+
+        // Update Background Video & Main Video
+        const videoPath = `/static/video/${carKey}.mp4`;
+        const bgVideo = document.getElementById('modalBgVideo');
+        const bgSource = document.getElementById('bgVideoSource');
+        const mainVideo = document.getElementById('modalMainVideo');
+
+        if (bgSource && bgVideo) {
+            bgSource.src = videoPath;
+            bgVideo.load();
+            bgVideo.play().catch(e => console.log("Auto-play blocked or video missing"));
+        }
+
+        if (mainVideo) {
+            mainVideo.src = videoPath;
+            mainVideo.load();
+            mainVideo.play().catch(e => console.log("Auto-play blocked or video missing"));
+        }
+
+        // Generate Upgrades List
+        const list = document.getElementById('upgradeList');
+        if (list) {
+            list.innerHTML = car.upgrades.map(upg => `
+                <li class="flex justify-between items-center p-4 bg-white/5 border border-white/5 hover:bg-white/10 transition group">
+                    <span class="italic font-bold text-sm text-zinc-300 uppercase tracking-tight">${upg}</span>
+                    <span class="text-purple-500 font-black opacity-0 group-hover:opacity-100 transition-opacity">READY</span>
+                </li>
+            `).join('');
+        }
+
+        // Show the Modal
+        document.getElementById('tuningModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('tuningModal').classList.add('hidden');
+        const bgVideo = document.getElementById('modalBgVideo');
+        const mainVideo = document.getElementById('modalMainVideo');
+        
+        // Stop videos when closing to save CPU
+        if (bgVideo) { bgVideo.pause(); bgVideo.src = ""; }
+        if (mainVideo) { mainVideo.pause(); mainVideo.src = ""; }
+    }
+</script>
+    
+</body>
+</html>

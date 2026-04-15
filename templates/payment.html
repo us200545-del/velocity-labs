@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-LABS | SECURE GATEWAY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050505; font-family: 'Inter', sans-serif; }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="text-white antialiased">
+
+    <div id="loader" class="fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center hidden">
+        <div class="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="font-orbitron italic text-xs tracking-[0.5em] text-purple-500">ENCRYPTING TRANSACTION...</p>
+    </div>
+
+    <div class="container mx-auto px-8 py-20 max-w-6xl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            
+            <div class="lg:col-span-2">
+                <h1 class="text-5xl font-black italic tracking-tighter uppercase font-orbitron mb-2">Checkout</h1>
+                <p class="text-zinc-500 text-[10px] uppercase tracking-[0.5em] mb-12 font-bold italic">Secure Engineering Portal</p>
+
+                <div class="space-y-4">
+                    <div onclick="setMethod('UPI')" class="payment-card p-6 bg-zinc-900/40 border border-white/5 cursor-pointer hover:border-purple-500/50 transition-all">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl">📱</span>
+                                <span class="font-bold uppercase tracking-widest text-sm">UPI Transfer</span>
+                            </div>
+                            <input type="radio" name="pay" id="upi_radio" class="accent-purple-500">
+                        </div>
+                        <div id="upi_fields" class="mt-4 hidden animate-fade-in">
+                            <input type="text" placeholder="yourname@upi" class="w-full bg-black border border-white/10 p-3 text-xs focus:border-purple-500 outline-none">
+                        </div>
+                    </div>
+
+                    <div onclick="setMethod('CARD')" class="payment-card p-6 bg-zinc-900/40 border border-white/5 cursor-pointer hover:border-purple-500/50 transition-all">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl">💳</span>
+                                <span class="font-bold uppercase tracking-widest text-sm">Credit / Debit Card</span>
+                            </div>
+                            <input type="radio" name="pay" id="card_radio" class="accent-purple-500">
+                        </div>
+                        <div id="card_fields" class="mt-6 space-y-4 hidden">
+                            <input type="text" placeholder="CARD NUMBER" class="w-full bg-black border border-white/10 p-4 text-xs tracking-[0.2em] outline-none focus:border-purple-500">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="MM/YY" class="bg-black border border-white/10 p-4 text-xs outline-none focus:border-purple-500">
+                                <input type="password" placeholder="CVV" class="bg-black border border-white/10 p-4 text-xs outline-none focus:border-purple-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass border border-white/5 p-8 h-fit sticky top-24">
+                <h2 class="font-orbitron text-lg mb-8 italic">Order Summary</h2>
+                <div id="summaryItems" class="space-y-4 mb-8">
+                    </div>
+                <div class="border-t border-white/10 pt-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-zinc-500 text-[10px] uppercase font-bold">Subtotal</span>
+                        <span id="subtotal" class="font-mono">₹0</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-zinc-500 text-[10px] uppercase font-bold">GST (18%)</span>
+                        <span id="gst" class="font-mono">₹0</span>
+                    </div>
+                    <div class="flex justify-between items-center py-4 border-t border-white/10">
+                        <span class="font-orbitron text-sm">Total</span>
+                        <span id="total" class="text-2xl font-black text-purple-500">₹0</span>
+                    </div>
+                </div>
+                <button onclick="processPayment()" class="w-full py-4 bg-white text-black font-black uppercase text-[10px] tracking-widest hover:bg-purple-600 hover:text-white transition-all">
+                    Authorize Payment
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function setMethod(method) {
+            document.getElementById('upi_fields').classList.add('hidden');
+            document.getElementById('card_fields').classList.add('hidden');
+            document.getElementById('upi_radio').checked = (method === 'UPI');
+            document.getElementById('card_radio').checked = (method === 'CARD');
+            
+            if(method === 'UPI') document.getElementById('upi_fields').classList.remove('hidden');
+            if(method === 'CARD') document.getElementById('card_fields').classList.remove('hidden');
+        }
+
+        function loadSummary() {
+            const cart = JSON.parse(localStorage.getItem('vlab_cart')) || [];
+            const container = document.getElementById('summaryItems');
+            let subtotal = 0;
+
+            container.innerHTML = cart.map(item => {
+                // Convert price string like "₹4,50,000" to number
+                const priceNum = parseInt(item.price.replace(/[^\d]/g, ''));
+                subtotal += priceNum;
+                
+                return `
+                    <div class="flex justify-between items-start text-[11px]">
+                        <span class="text-zinc-300 uppercase tracking-tighter w-2/3">${item.name}</span>
+                        <span class="font-mono text-zinc-500">${item.price}</span>
+                    </div>
+                `;
+            }).join('');
+
+            const gst = subtotal * 0.18;
+            const total = subtotal + gst;
+
+            document.getElementById('subtotal').innerText = '₹' + subtotal.toLocaleString('en-IN');
+            document.getElementById('gst').innerText = '₹' + Math.round(gst).toLocaleString('en-IN');
+            document.getElementById('total').innerText = '₹' + Math.round(total).toLocaleString('en-IN');
+        }
+
+        function processPayment() {
+            document.getElementById('loader').classList.remove('hidden');
+            setTimeout(() => {
+                alert("TRANSACTION SUCCESSFUL. The beast is ready for its upgrades.");
+                localStorage.removeItem('vlab_cart');
+                window.location.href = "/";
+            }, 3000);
+        }
+
+        loadSummary();
+    </script>
+</body>
+</html>
