@@ -1,4 +1,4 @@
-# 🏎️ Velocity Labs | BMW Performance Hub
+# 🏎️ Velocity Labs | Car Performance Hub
 
 **Velocity Labs** is a high-end web platform designed for Car enthusiasts to explore performance parts and manage their automotive profile. The site features a cinematic user experience with integrated video backgrounds and a secure administrative backend.
 
