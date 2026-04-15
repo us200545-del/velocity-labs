@@ -1,9 +1,9 @@
 # 🏎️ Velocity Labs | BMW Performance Hub
 
-**Velocity Labs** is a high-end web platform designed for BMW enthusiasts to explore performance parts and manage their automotive profile. The site features a cinematic user experience with integrated video backgrounds and a secure administrative backend.
+**Velocity Labs** is a high-end web platform designed for Car enthusiasts to explore performance parts and manage their automotive profile. The site features a cinematic user experience with integrated video backgrounds and a secure administrative backend.
 
 ## 🚀 Key Features
-* **Cinematic UI:** High-definition BMW video backgrounds for an immersive experience.
+* **Cinematic UI:** High-definition Car video backgrounds for an immersive experience.
 * **Secure Authentication:** Custom-built login and signup system using JSON-based data storage.
 * **Admin Shield:** Environment-variable protected administrative access to secure the project's "Engine."
 * **Responsive Design:** Optimized for high-performance browsing.
