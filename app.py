@@ -54,7 +54,12 @@ def login():
         users = get_users()
         user_match = next((u for u in users if u['username'] == uid and u['password'] == pwd), None)
         
-        if (uid == 'admin' and pwd == 'velocity2026') or user_match:
+        # Grab secrets from the server's environment settings
+        admin_user = os.getenv('ADMIN_USER')
+        admin_pass = os.getenv('ADMIN_PASS')
+
+        # Check against the secret variables OR the JSON database
+        if (uid == admin_user and pwd == admin_pass) or user_match:
             session['logged_in'] = True
             session['username'] = uid
             return redirect(url_for('home'))
